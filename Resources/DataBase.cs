@@ -32,12 +32,16 @@ namespace ClinicApp.Resources
 
                 var db = new SQLiteConnection(Path);
                 var cmd = new SQLiteCommand(db);
+
                 cmd.CommandText = "CREATE TABLE " + nameTable + " (ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name STRING NOT NULL, discription STRING NOT NULL );";
                 cmd.ExecuteNonQuery();
+
                 cmd.CommandText = "CREATE TABLE ver (ver INTEGER NOT NULL);";
                 cmd.ExecuteNonQuery();
+
                 cmd.CommandText = "INSERT INTO ver (ver) VALUES (0)";
                 cmd.ExecuteNonQuery();
+                
                 db.Close();
                 return true;
             }
@@ -82,6 +86,14 @@ namespace ClinicApp.Resources
             var db = new SQLiteConnection(Path);
             var cmd = new SQLiteCommand(db);
             cmd.CommandText = "DELETE FROM " + nameTable + " WHERE Name='" + name + "'";
+            cmd.ExecuteNonQuery();
+            db.Close();
+        }
+        public void Delete()
+        {
+            var db = new SQLiteConnection(Path);
+            var cmd = new SQLiteCommand(db);
+            cmd.CommandText = "DELETE FROM " + nameTable;
             cmd.ExecuteNonQuery();
             db.Close();
         }

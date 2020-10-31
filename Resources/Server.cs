@@ -6,7 +6,7 @@ using System.Net.Sockets;
 
 namespace ClinicApp.Resources
 {
-    class Server
+    public class Server
     {
         protected string host = "nextrun.mykeenetic.by";
         protected int port = 801;

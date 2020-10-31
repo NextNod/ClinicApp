@@ -18,8 +18,6 @@ using System.Text;
 
 namespace ClinicApp
 {
-    
-
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : ListActivity
     {   
@@ -30,17 +28,28 @@ namespace ClinicApp
 
             DataBase dataBase = new DataBase();
             Server server = new Server();
-
-            if (dataBase.ver != server.ver) 
-            {
-                
-            }
-
-            List<Data> array = dataBase.GetData();
             List<string> list = new List<string>();
-            foreach (Data data in array) 
+            List<Data> array = new List<Data>();
+
+            if (dataBase.ver != server.ver)
             {
-                list.Add(data.name);
+                dataBase.Delete();
+                array = server.GetDatas();
+
+                foreach (Data dat in array)
+                {
+                    dataBase.Insert(dat.name, dat.discription);
+                    list.Add(dat.name);
+                }
+            }
+            else
+            {
+                array = dataBase.GetData();
+
+                foreach (Data data in array)
+                {
+                    list.Add(data.name);
+                }
             }
 
             ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, list);
