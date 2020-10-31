@@ -15,6 +15,7 @@ using System.Xml;
 using Android.Content;
 using Android.Views;
 using System.Text;
+using Android.Util;
 
 namespace ClinicApp
 {

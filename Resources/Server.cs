@@ -18,7 +18,8 @@ namespace ClinicApp.Resources
                 NetworkStream stream = client.GetStream();
 
                 sendData(stream, "ver");
-                return Convert.ToInt32(getData(stream));
+                string data = getData(stream);
+                return Convert.ToInt32(data);
             }
         }
 
@@ -34,14 +35,14 @@ namespace ClinicApp.Resources
             
             while (true) 
             {
-                if (data[i] == ':') 
+                if (data[i] == ':')
                 {
                     Data tempD = new Data();
                     tempD.name = temp;
                     temp = "";
                     i++;
 
-                    while (data[i] == ';' || data[i] == '.') 
+                    while (data[i] == ';')
                     {
                         temp += data[i];
                         i++;
@@ -50,13 +51,12 @@ namespace ClinicApp.Resources
                     tempD.discription = temp;
                     temp = "";
                     result.Add(tempD);
-                }
-
-                if (data[i] == ';')
                     i++;
+                }
                 else if (data[i] == '.')
+                {
                     break;
-
+                }
 
                 temp += data[i];
                 i++;
@@ -73,9 +73,16 @@ namespace ClinicApp.Resources
 
         private string getData(NetworkStream stream)
         {
-            Span<byte> vs = new Span<byte>();
-            stream.Read(vs);
-            return Encoding.UTF8.GetString(vs.ToArray());
+            byte[] vs = new byte[255];
+            stream.Read(vs, 0,vs.Length);
+            string data = Encoding.UTF8.GetString(vs.ToArray()), rez = "";
+            
+            for (int i = 0; data[i] != '\0'; i++) 
+            {
+                rez += data[i];
+            }
+            
+            return rez;
         }
     }
 }
