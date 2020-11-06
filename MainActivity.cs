@@ -32,16 +32,20 @@ namespace ClinicApp
             List<string> list = new List<string>();
             List<Data> array = new List<Data>();
 
-            if (dataBase.ver != server.ver)
+            int Sver = server.ver;
+
+            if (dataBase.ver != Sver)
             {
                 dataBase.Delete();
                 array = server.GetDatas();
 
                 foreach (Data dat in array)
                 {
-                    dataBase.Insert(dat.name, dat.discription);
+                    dataBase.Insert(dat.ID, dat.name, dat.discription);
                     list.Add(dat.name);
                 }
+
+                dataBase.ver = Sver;
             }
             else
             {
@@ -62,6 +66,8 @@ namespace ClinicApp
                 toast.Show();
 
                 Bundle data = new Bundle();
+
+                data.PutInt("ID", array[pos].ID);
                 data.PutString("name", array[pos].name);
                 data.PutString("description", array[pos].discription);
 

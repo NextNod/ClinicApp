@@ -6,6 +6,7 @@ namespace ClinicApp.Resources
 {
     public class Data
     {
+        public int ID { set; get; }
         public int ver { set; get; }
         public string name { set; get; }
         public string discription { set; get; }
@@ -33,7 +34,7 @@ namespace ClinicApp.Resources
                 var db = new SQLiteConnection(Path);
                 var cmd = new SQLiteCommand(db);
 
-                cmd.CommandText = "CREATE TABLE " + nameTable + " (ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name STRING NOT NULL, discription STRING NOT NULL );";
+                cmd.CommandText = "CREATE TABLE " + nameTable + " (ID INTEGER NOT NULL PRIMARY KEY, name STRING NOT NULL, discription STRING NOT NULL );";
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "CREATE TABLE ver (ver INTEGER NOT NULL);";
@@ -68,15 +69,16 @@ namespace ClinicApp.Resources
                 var cmd = new SQLiteCommand(db);
                 cmd.CommandText = "SELECT * FROM ver";
                 List<Data> vs = cmd.ExecuteQuery<Data>();
+                db.Close();
                 return vs[0].ver;
             }
         }
 
-        public void Insert(string name, string discription)
+        public void Insert(int ID, string name, string discription)
         {
             var db = new SQLiteConnection(Path);
             var cmd = new SQLiteCommand(db);
-            cmd.CommandText = "INSERT INTO " + nameTable + " (name, discription) VALUES ('" + name + "', '" + discription + "')";
+            cmd.CommandText = "INSERT INTO " + nameTable + " (ID, name, discription) VALUES (" + ID + ", '" + name + "', '" + discription + "')";
             cmd.ExecuteNonQuery();
             db.Close();
         }
@@ -89,6 +91,14 @@ namespace ClinicApp.Resources
             cmd.ExecuteNonQuery();
             db.Close();
         }
+        public void Delete(int ID)
+        {
+            var db = new SQLiteConnection(Path);
+            var cmd = new SQLiteCommand(db);
+            cmd.CommandText = "DELETE FROM " + nameTable + " WHERE ID=" + ID;
+            cmd.ExecuteNonQuery();
+            db.Close();
+        }
         public void Delete()
         {
             var db = new SQLiteConnection(Path);
@@ -98,11 +108,11 @@ namespace ClinicApp.Resources
             db.Close();
         }
 
-        public void Update(string name, string discription)
+        public void Update(int ID, string name, string discription)
         {
             var db = new SQLiteConnection(Path);
             var cmd = new SQLiteCommand(db);
-            cmd.CommandText = "UPDATE " + nameTable + " SET discription='" + discription + "' WHERE name='" + name + "'";
+            cmd.CommandText = "UPDATE " + nameTable + " SET ID=" + ID + " discription='" + discription + "' WHERE name='" + name + "'";
             cmd.ExecuteNonQuery();
             db.Close();
         }
@@ -115,6 +125,7 @@ namespace ClinicApp.Resources
             cmd.CommandText = "SELECT * FROM " + nameTable;
             List<Data> name = cmd.ExecuteQuery<Data>();
 
+            db.Close();
             return name;
         }
     }

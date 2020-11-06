@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Sockets;
+using Android.Widget;
 
 namespace ClinicApp.Resources
 {
@@ -19,8 +20,23 @@ namespace ClinicApp.Resources
 
                 sendData(stream, "ver");
                 string data = getData(stream);
+
+                client.Close();
+                stream.Close();
+
                 return Convert.ToInt32(data);
             }
+        }
+
+        public void sendNote(int ID) 
+        {
+            TcpClient client = new TcpClient(host, port);
+            NetworkStream stream = client.GetStream();
+
+            sendData(stream, "send: " + ID);
+
+            stream.Close();
+            client.Close();
         }
 
         public List<Data> GetDatas() 
@@ -32,17 +48,30 @@ namespace ClinicApp.Resources
             string data = getData(stream), temp = "";
             int i = 0;
             List<Data> result = new List<Data>();
-            
+
+            client.Close();
+            stream.Close();
+
             while (true) 
             {
-                if (data[i] == ':')
+                if (data[i] == ' ')
                 {
                     Data tempD = new Data();
+                    tempD.ID = Convert.ToInt32(temp);
+                    temp = "";
+                    i++;
+
+                    while (data[i] != ':')
+                    {
+                        temp += data[i];
+                        i++;
+                    }
+
                     tempD.name = temp;
                     temp = "";
                     i++;
 
-                    while (data[i] == ';')
+                    while (data[i] != ';')
                     {
                         temp += data[i];
                         i++;
@@ -53,7 +82,8 @@ namespace ClinicApp.Resources
                     result.Add(tempD);
                     i++;
                 }
-                else if (data[i] == '.')
+                
+                if (data[i] == '.')
                 {
                     break;
                 }
@@ -61,7 +91,6 @@ namespace ClinicApp.Resources
                 temp += data[i];
                 i++;
             }
-
             return result;
         }
 
@@ -74,9 +103,9 @@ namespace ClinicApp.Resources
         private string getData(NetworkStream stream)
         {
             byte[] vs = new byte[255];
-            stream.Read(vs, 0,vs.Length);
-            string data = Encoding.UTF8.GetString(vs.ToArray()), rez = "";
-            
+            stream.Read(vs, 0, vs.Length);
+            string data = Encoding.UTF8.GetString(vs), rez = "";
+
             for (int i = 0; data[i] != '\0'; i++) 
             {
                 rez += data[i];

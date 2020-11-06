@@ -24,6 +24,7 @@ namespace ClinicApp
             SetContentView(Resource.Layout.Description);
 
             Bundle data = Intent.GetBundleExtra("data");
+            int ID = data.GetInt("ID");
             string name = data.GetString("name");
             string discription = data.GetString("description");
 
@@ -42,12 +43,14 @@ namespace ClinicApp
 
                 EditText phoneNumber = (EditText)view.FindViewById<EditText>(Resource.Id.phoneNumber);
                 builder.SetView(view);
+
                 builder.SetPositiveButton("Send Request", (afk, kfa) => 
                 {
                     number = phoneNumber.Text;
-                    Toast toast = Toast.MakeText(this, number, ToastLength.Long);
+                    Toast toast = Toast.MakeText(this, ID + number, ToastLength.Long);
                     toast.Show();
                 });
+
                 builder.SetNegativeButton("Exit", (afk, kfa) => { });
                 builder.Show();
             };
