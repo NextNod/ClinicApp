@@ -28,12 +28,14 @@ namespace ClinicApp.Resources
             }
         }
 
-        public void sendNote(int ID) 
+        public void sendNote(int ID, string number) 
         {
             TcpClient client = new TcpClient(host, port);
             NetworkStream stream = client.GetStream();
 
-            sendData(stream, "send: " + ID);
+            sendData(stream, "send");
+            getData(stream);
+            sendData(stream, ID + " " + number);
 
             stream.Close();
             client.Close();
@@ -45,7 +47,8 @@ namespace ClinicApp.Resources
             NetworkStream stream = client.GetStream();
 
             sendData(stream, "get");
-            string data = getData(stream), temp = "";
+            int len = Convert.ToInt32(getData(stream));
+            string data = getData(stream, len), temp = "";
             int i = 0;
             List<Data> result = new List<Data>();
 
@@ -103,6 +106,20 @@ namespace ClinicApp.Resources
         private string getData(NetworkStream stream)
         {
             byte[] vs = new byte[255];
+            stream.Read(vs, 0, vs.Length);
+            string data = Encoding.UTF8.GetString(vs), rez = "";
+
+            for (int i = 0; data[i] != '\0'; i++) 
+            {
+                rez += data[i];
+            }
+            
+            return rez;
+        }
+        
+        private string getData(NetworkStream stream, int lenght)
+        {
+            byte[] vs = new byte[lenght + 1];
             stream.Read(vs, 0, vs.Length);
             string data = Encoding.UTF8.GetString(vs), rez = "";
 

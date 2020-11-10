@@ -91,6 +91,7 @@ namespace ClinicApp.Resources
             cmd.ExecuteNonQuery();
             db.Close();
         }
+
         public void Delete(int ID)
         {
             var db = new SQLiteConnection(Path);
@@ -99,6 +100,7 @@ namespace ClinicApp.Resources
             cmd.ExecuteNonQuery();
             db.Close();
         }
+
         public void Delete()
         {
             var db = new SQLiteConnection(Path);

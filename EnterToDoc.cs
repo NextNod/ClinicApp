@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Util.Zip;
 using Java.Security;
+using ClinicApp.Resources;
 
 namespace ClinicApp
 {
@@ -31,6 +32,7 @@ namespace ClinicApp
             TextView nameText = FindViewById<TextView>(Resource.Id.name);
             TextView discriptionText = FindViewById<TextView>(Resource.Id.description);
             Button button = FindViewById<Button>(Resource.Id.button_deal);
+            Server server = new Server();
 
             nameText.Text = name;
             discriptionText.Text = discription;
@@ -49,6 +51,8 @@ namespace ClinicApp
                     number = phoneNumber.Text;
                     Toast toast = Toast.MakeText(this, ID + number, ToastLength.Long);
                     toast.Show();
+
+                    server.sendNote(ID, number);
                 });
 
                 builder.SetNegativeButton("Exit", (afk, kfa) => { });
