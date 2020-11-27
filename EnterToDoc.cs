@@ -36,25 +36,24 @@ namespace ClinicApp
 
             nameText.Text = name;
             discriptionText.Text = discription;
+
+            string number = "null";
+
             button.Click += (e, o) => 
             {
-                string number = "null";
-                
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                View view = this.LayoutInflater.Inflate(Resource.Layout.dialog_save, null);
+                View view = this.LayoutInflater.Inflate(Resource.Layout.dialogAlert, null);
 
-                EditText phoneNumber = (EditText)view.FindViewById<EditText>(Resource.Id.phoneNumber);
+                EditText nameClient = (EditText)view.FindViewById<EditText>(Resource.Id.name);
                 builder.SetView(view);
-
-                builder.SetPositiveButton("Send Request", (afk, kfa) => 
+                builder.SetPositiveButton("Send Request", (afk, kfa) =>
                 {
-                    number = phoneNumber.Text;
+                    number = nameClient.Text;
                     Toast toast = Toast.MakeText(this, ID + number, ToastLength.Long);
                     toast.Show();
 
                     server.sendNote(ID, number);
                 });
-
                 builder.SetNegativeButton("Exit", (afk, kfa) => { });
                 builder.Show();
             };
