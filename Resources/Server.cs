@@ -28,6 +28,34 @@ namespace ClinicApp.Resources
             }
         }
 
+        public List<string> getOrderDate(int docId) 
+        {
+            TcpClient client = new TcpClient(host, port);
+            NetworkStream stream = client.GetStream();
+
+            sendData(stream, "orderDate");
+            getData(stream);
+            sendData(stream, Convert.ToString(docId));
+            int lenght = Convert.ToInt32(getData(stream));
+            sendData(stream, "OK");
+            string data = getData(stream, lenght), temp = "";
+            List<string> dates = new List<string>();
+
+            for (int i = 0; i < data.Length; i++) 
+            {
+                if (data[i] == ',') 
+                {
+                    dates.Add(temp);
+                    temp = "";
+                    continue;
+                }
+
+                temp += data[i];
+            }
+
+            return dates;
+        }
+
         public void sendNote(int ID, string number) 
         {
             TcpClient client = new TcpClient(host, port);

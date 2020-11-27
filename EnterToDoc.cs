@@ -32,30 +32,16 @@ namespace ClinicApp
             TextView nameText = FindViewById<TextView>(Resource.Id.name);
             TextView discriptionText = FindViewById<TextView>(Resource.Id.description);
             Button button = FindViewById<Button>(Resource.Id.button_deal);
-            Server server = new Server();
 
             nameText.Text = name;
             discriptionText.Text = discription;
 
-            string number = "null";
-
             button.Click += (e, o) => 
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                View view = this.LayoutInflater.Inflate(Resource.Layout.dialogAlert, null);
-
-                EditText nameClient = (EditText)view.FindViewById<EditText>(Resource.Id.name);
-                builder.SetView(view);
-                builder.SetPositiveButton("Send Request", (afk, kfa) =>
-                {
-                    number = nameClient.Text;
-                    Toast toast = Toast.MakeText(this, ID + number, ToastLength.Long);
-                    toast.Show();
-
-                    server.sendNote(ID, number);
-                });
-                builder.SetNegativeButton("Exit", (afk, kfa) => { });
-                builder.Show();
+                Intent intent = new Intent(BaseContext, typeof(CreateOrder));
+                intent.PutExtra("data", data);
+                StartActivity(intent);
+                Finish();
             };
         }
     }

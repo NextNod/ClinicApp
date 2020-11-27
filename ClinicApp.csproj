@@ -69,13 +69,13 @@
   <ItemGroup>
     <Compile Include="EnterToDoc.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\CreateOrder.cs" />
     <Compile Include="Resources\DataBase.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Server.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data.db" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -122,10 +122,7 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\dialog_save.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\dialogAlert.xml" />
+    <AndroidResource Include="Resources\layout\Order.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
