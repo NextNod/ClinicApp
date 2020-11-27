@@ -24,10 +24,7 @@ namespace ClinicApp.Resources
             Button orderDate = FindViewById<Button>(Resource.Id.orderDate);
             Button birthday = FindViewById<Button>(Resource.Id.birthday);
 
-            List<string> list = new List<string>();
-            list.Add("10.11.2020");
-            list.Add("11.11.2020");
-            list.Add("12.11.2020");
+            List<string> list = server.getOrderDate(data.GetInt("ID"));
 
             orderDate.Click += (o, e) =>
             {
@@ -38,8 +35,6 @@ namespace ClinicApp.Resources
                     int selected = even.Which;
                     orderDate.Text = list[selected];
                     orderDate.SetTextColor(Android.Graphics.Color.Green);
-                    Toast toast = Toast.MakeText(BaseContext, selected + ":" + list[selected], ToastLength.Long);
-                    toast.Show();
                 });
                 builder.Show();
             };

@@ -39,6 +39,10 @@ namespace ClinicApp.Resources
             int lenght = Convert.ToInt32(getData(stream));
             sendData(stream, "OK");
             string data = getData(stream, lenght), temp = "";
+
+            stream.Close();
+            client.Close();
+
             List<string> dates = new List<string>();
 
             for (int i = 0; i < data.Length; i++) 
