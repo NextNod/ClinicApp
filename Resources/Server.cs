@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using Android.Widget;
+using Android.App;
 
-namespace ClinicApp.Resources
+namespace ClinicApp.Resources 
 {
-    public class Server
+    public class Server : Activity
     {
         protected string host = "nextrun.mykeenetic.by";
         protected int port = 801;

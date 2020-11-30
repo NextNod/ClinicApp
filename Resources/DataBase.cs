@@ -6,10 +6,12 @@ namespace ClinicApp.Resources
 {
     public class Data
     {
-        public int ID { set; get; }
-        public int ver { set; get; }
-        public string name { set; get; }
-        public string discription { set; get; }
+        public int ID;
+        public int ver;
+        public string name;
+        public string discription;
+        public string birthday;
+        public string phone;
     }
 
     public class DataBase
@@ -34,21 +36,59 @@ namespace ClinicApp.Resources
                 var db = new SQLiteConnection(Path);
                 var cmd = new SQLiteCommand(db);
 
-                cmd.CommandText = "CREATE TABLE " + nameTable + " (ID INTEGER NOT NULL PRIMARY KEY, name STRING NOT NULL, discription STRING NOT NULL );";
+                cmd.CommandText = "CREATE TABLE " + nameTable + " (ID INTEGER NOT NULL PRIMARY KEY, name STRING NOT NULL, discription STRING NOT NULL);";
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "CREATE TABLE ver (ver INTEGER NOT NULL);";
                 cmd.ExecuteNonQuery();
 
+                cmd.CommandText = "CREATE TABLE acc (name STRING NOT NULL, birthday STRING NOT NULL, phone STRING NOT NULL);";
+                cmd.ExecuteNonQuery();
+
                 cmd.CommandText = "INSERT INTO ver (ver) VALUES (0)";
                 cmd.ExecuteNonQuery();
-                
+
+                cmd.CommandText = $"INSERT INTO acc (name, birthday, phone) VALUES ('0', '0', '0')";
+                cmd.ExecuteNonQuery();
+
                 db.Close();
                 return true;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        public void saveAcc(string name, string birthday, string phone) 
+        {
+            var db = new SQLiteConnection(Path);
+            var cmd = new SQLiteCommand(db);
+
+            cmd.CommandText = $"UPDATE acc SET name='{name}', birthday='{birthday}', phone='{phone}'";
+            cmd.ExecuteNonQuery();
+            db.Close();
+        }
+
+        public List<string> getAcc() 
+        {
+            var db = new SQLiteConnection(Path);
+            var cmd = new SQLiteCommand(db);
+
+            cmd.CommandText = "SELECT * FROM acc";
+            List<Data> data = cmd.ExecuteQuery<Data>();
+
+            if (data[0].name == "0")
+            {
+                return null;
+            }
+            else 
+            {
+                List<string> result = new List<string>();
+                result.Add(data[0].name);
+                result.Add(data[0].birthday);
+                result.Add(data[0].phone);
+                return result;
             }
         }
 

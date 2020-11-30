@@ -16,7 +16,7 @@
         android:layout_marginTop="20.0dp">
         <TextView
             android:text="Фамилия Имя Отчество"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView1" />
@@ -26,8 +26,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/name" />
         <TextView
-            android:text="Номер телефона"
+            android:text="Это поле нужно заполнить"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nullEditName" />
+        <TextView
+            android:text="Номер телефона"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2" />
@@ -37,8 +45,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/phone" />
         <TextView
-            android:text="Дата рождения"
+            android:text="Это поле нужно заполнить"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nullEditPhone" />
+        <TextView
+            android:text="Дата рождения"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3" />
@@ -49,7 +65,7 @@
             android:id="@+id/birthday" />
         <TextView
             android:text="Ближайшее доступное время"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView4" />

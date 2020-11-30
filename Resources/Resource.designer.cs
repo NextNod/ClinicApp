@@ -3330,8 +3330,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a0036
 			public const int beginning = 2131361846;
 			
-			// aapt resource value: 0x7f0a00c5
-			public const int birthday = 2131361989;
+			// aapt resource value: 0x7f0a00c7
+			public const int birthday = 2131361991;
 			
 			// aapt resource value: 0x7f0a0066
 			public const int blocking = 2131361894;
@@ -3429,8 +3429,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a0027
 			public const int disableHome = 2131361831;
 			
-			// aapt resource value: 0x7f0a00ca
-			public const int doneButton = 2131361994;
+			// aapt resource value: 0x7f0a00cc
+			public const int doneButton = 2131361996;
 			
 			// aapt resource value: 0x7f0a008f
 			public const int edit_query = 2131361935;
@@ -3465,8 +3465,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a005f
 			public const int filled = 2131361887;
 			
-			// aapt resource value: 0x7f0a00c8
-			public const int firstOrder = 2131361992;
+			// aapt resource value: 0x7f0a00ca
+			public const int firstOrder = 2131361994;
 			
 			// aapt resource value: 0x7f0a005c
 			public const int @fixed = 2131361884;
@@ -3534,8 +3534,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a0070
 			public const int list_item = 2131361904;
 			
-			// aapt resource value: 0x7f0a00cc
-			public const int masked = 2131361996;
+			// aapt resource value: 0x7f0a00ce
+			public const int masked = 2131361998;
 			
 			// aapt resource value: 0x7f0a009c
 			public const int message = 2131361948;
@@ -3579,8 +3579,14 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a00b5
 			public const int notification_main_column_container = 2131361973;
 			
-			// aapt resource value: 0x7f0a00c7
-			public const int orderDate = 2131361991;
+			// aapt resource value: 0x7f0a00c2
+			public const int nullEditName = 2131361986;
+			
+			// aapt resource value: 0x7f0a00c5
+			public const int nullEditPhone = 2131361989;
+			
+			// aapt resource value: 0x7f0a00c9
+			public const int orderDate = 2131361993;
 			
 			// aapt resource value: 0x7f0a0060
 			public const int outline = 2131361888;
@@ -3594,8 +3600,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a000b
 			public const int parent_matrix = 2131361803;
 			
-			// aapt resource value: 0x7f0a00c3
-			public const int phone = 2131361987;
+			// aapt resource value: 0x7f0a00c4
+			public const int phone = 2131361988;
 			
 			// aapt resource value: 0x7f0a0058
 			public const int pin = 2131361880;
@@ -3618,8 +3624,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a00b7
 			public const int right_side = 2131361975;
 			
-			// aapt resource value: 0x7f0a00c9
-			public const int saveData = 2131361993;
+			// aapt resource value: 0x7f0a00cb
+			public const int saveData = 2131361995;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int save_image_matrix = 2131361804;
@@ -3768,14 +3774,14 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a00c1
 			public const int textView1 = 2131361985;
 			
-			// aapt resource value: 0x7f0a00c2
-			public const int textView2 = 2131361986;
-			
-			// aapt resource value: 0x7f0a00c4
-			public const int textView3 = 2131361988;
+			// aapt resource value: 0x7f0a00c3
+			public const int textView2 = 2131361987;
 			
 			// aapt resource value: 0x7f0a00c6
-			public const int textView4 = 2131361990;
+			public const int textView3 = 2131361990;
+			
+			// aapt resource value: 0x7f0a00c8
+			public const int textView4 = 2131361992;
 			
 			// aapt resource value: 0x7f0a00b1
 			public const int text_input_password_toggle = 2131361969;
@@ -3840,8 +3846,8 @@ namespace ClinicApp
 			// aapt resource value: 0x7f0a001b
 			public const int view_offset_helper = 2131361819;
 			
-			// aapt resource value: 0x7f0a00cb
-			public const int visible = 2131361995;
+			// aapt resource value: 0x7f0a00cd
+			public const int visible = 2131361997;
 			
 			// aapt resource value: 0x7f0a0043
 			public const int withText = 2131361859;
