@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,16 @@ namespace ClinicApp.Resources
     {
         protected string host = "nextrun.mykeenetic.by";
         protected int port = 801;
+        protected Android.Content.Context obj;
+
+        public Server() 
+        {
+        }
+
+        public Server(Android.Content.Context obj) 
+        {
+            this.obj = obj;
+        }
         public int ver
         {
             get
@@ -27,6 +38,23 @@ namespace ClinicApp.Resources
 
                 return Convert.ToInt32(data);
             }
+        }
+
+        public void sendOrder(int ID, string name, string phone, string birthday, string orderDay, bool first) 
+        {
+            TcpClient client = new TcpClient(host, port);
+            NetworkStream stream = client.GetStream();
+            
+            string data = ID + ":" + name + ":" + phone + ":" + birthday + ":" + orderDay + ":" + (first ? "+" : "-") + ":";
+            
+            sendData(stream, "order");
+            getData(stream);
+            sendData(stream, Convert.ToString(Encoding.UTF8.GetBytes(data).Length));
+            getData(stream);
+            sendData(stream, data);
+
+            stream.Close();
+            client.Close();
         }
 
         public List<string> getOrderDate(int docId) 

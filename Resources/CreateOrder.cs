@@ -22,63 +22,85 @@ namespace ClinicApp.Resources
             Bundle data = Intent.GetBundleExtra("data");
             Server server = new Server();
 
-            Button orderDate = FindViewById<Button>(Resource.Id.orderDate);
-            Button birthday = FindViewById<Button>(Resource.Id.birthday);
+            Button buttonOrderDate = FindViewById<Button>(Resource.Id.orderDate);
+            Button buttonBirthday = FindViewById<Button>(Resource.Id.birthday);
             Button buttonDone = FindViewById<Button>(Resource.Id.doneButton);
+
             EditText editName = FindViewById<EditText>(Resource.Id.name);
             EditText editPhone = FindViewById<EditText>(Resource.Id.phone);
+
             CheckBox checkFirst = FindViewById<CheckBox>(Resource.Id.firstOrder);
             CheckBox checkSave = FindViewById<CheckBox>(Resource.Id.saveData);
+
             TextView nullEditName = FindViewById<TextView>(Resource.Id.nullEditName);
             TextView nullEditPhone = FindViewById<TextView>(Resource.Id.nullEditPhone);
 
             Date dateGet = new Date();
             List<string> list = server.getOrderDate(data.GetInt("ID"));
-            int[] dates;
             
-            orderDate.Click += (o, e) =>
+            buttonOrderDate.Click += (o, e) =>
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.SetTitle("Выберите желаемую дату: ");
                 builder.SetItems(list.ToArray(), (sender, even) => 
                 {
                     int selected = even.Which;
-                    orderDate.Text = list[selected];
-                    orderDate.SetTextColor(Android.Graphics.Color.Green);
+                    buttonOrderDate.Text = list[selected];
+                    buttonOrderDate.SetTextColor(Android.Graphics.Color.Green);
                 });
                 builder.Show();
             };
 
-            birthday.Click += (o, e) => 
+            buttonBirthday.Click += (o, e) => 
             {
                 DatePickerDialog date = new DatePickerDialog(this, dateGet, 2020, 0, 0);
                 date.DismissEvent += (sender, even) => 
                 {
-                    dates = dateGet.getDate();
-                    birthday.Text = dates[0] + "." + dates[1] + "." + dates[2];
-                    birthday.SetTextColor(Android.Graphics.Color.Green);
+                    int[] dates = dateGet.getDate();
+                    buttonBirthday.Text = dates[0] + "." + dates[1] + "." + dates[2];
+                    buttonBirthday.SetTextColor(Android.Graphics.Color.Green);
                 };
                 date.Show();
             };
 
+            editName.TextChanged += (o, e) =>
+            {
+                nullEditName.Visibility = ViewStates.Invisible;
+            };
+
+            editPhone.TextChanged += (o, e) =>
+            {
+                nullEditPhone.Visibility = ViewStates.Invisible;
+            };
+
             buttonDone.Click += (o, e) => 
             {
-                if (checkSave.Checked)
+                if (editName.Text != "" && editPhone.Text != "")
                 {
-                    if (editName.Text != "" && editPhone.Text != "")
+                    string name, phone, birthday, orderDate;
+                    name = editName.Text;
+                    phone = editPhone.Text;
+                    birthday = buttonBirthday.Text;
+                    orderDate = buttonOrderDate.Text;
+
+                    if (checkSave.Checked) 
                     {
                         DataBase dataBase = new DataBase();
+                        dataBase.saveAcc(name, birthday, phone);
                     }
-                    else 
+
+                    server.sendOrder(data.GetInt("ID"), name, phone, birthday, orderDate, checkFirst.Checked);
+                }
+                else 
+                {
+                    if (editName.Text == "")
                     {
-                        if (editName.Text == "")
-                        {
-                            nullEditName.Visibility = ViewStates.Visible;
-                        }
-                        else 
-                        {
-                            nullEditPhone.Visibility = ViewStates.Visible;
-                        }
+                        nullEditName.Visibility = ViewStates.Visible;
+                    }
+
+                    if (editPhone.Text == "")
+                    {
+                        nullEditPhone.Visibility = ViewStates.Visible;
                     }
                 }
             };
